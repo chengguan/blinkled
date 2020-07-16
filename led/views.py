@@ -1,15 +1,22 @@
-from django.shortcuts import render
+from django.http import HttpResponse
 import RPi.GPIO as GPIO
 
-LED_PIN = 32
+LED_PIN = 24
+
 
 def turnOn(request):
-    GPIO.setmode(GPIO.BOARD)
+    GPIO.setwarnings(False)
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(LED_PIN, GPIO.OUT)
     GPIO.output(LED_PIN, 1)
-    return HttpResponse('')
+    html = "<html><body>Turn On.</body></html>"
+    return HttpResponse(html)
 
 
 def turnOff(request):
-    GPIO.setmode(GPIO.BOARD)
+    GPIO.setwarnings(False)
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(LED_PIN, GPIO.OUT)
     GPIO.output(LED_PIN, 0)
-    return HttpResponse('')
+    html = "<html><body>Turn Off.</body></html>"
+    return HttpResponse(html)
